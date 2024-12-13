@@ -11,13 +11,16 @@ fi
 timestamp=$(date +"%Y-%m-%d_%H:%M:%S")
 echo "This is the timestamp: $timestamp"
 
-archive_dir="${log_directory}_archive_$timestamp"
+archive_dir="${log_directory}_archive"
 echo "This is the archive directory: $archive_dir"
 
+if [ ! -d "$archive_dir" ];
+then
 sudo mkdir -p "$archive_dir"
+fi
 
 #this is where the logs are compressed
-sudo tar -zcvf "${archive_dir}/logs.tar.gz" "$log_directory"
+sudo tar -zcvf "${archive_dir}/logs_${timestamp}.tar.gz" "$log_directory"
 echo "Testing for archive directory:  ${archive_dir}/logs.tar.gz"
 
 if [ -d "${archive_dir}" ];
